@@ -22,7 +22,7 @@
                   echo "Deploy Azure Function"
                   az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
                   az account set -s $AZURE_SUBSCRIPTION_ID
-                  zip -r ../../../archive.zip ./*'
+                  zip -r archive.zip ./*'
                   az functionapp deployment source config-zip -g $RESOURCE_GROUP -n $FUNC_NAME --src archive.zip"
                   az logout
                 '''
