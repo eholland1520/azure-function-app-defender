@@ -1,0 +1,47 @@
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: windows-2019
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: AzureCLI@2
+    displayName: 'Azure CLI '
+    inputs:
+      connectedServiceNameARM: __armserviceconnection__
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: >-
+        curl -sSL -k --header "authorization: Bearer __bearer-token__" -X POST __console-url__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
+
+        unzip twistlock_serverless_defender.zip;
+  - task: DotNetCoreCLI@2
+    displayName: Build project
+    inputs:
+      projects: '**/*.csproj'
+      arguments: --output publish_output --configuration Release
+  - task: ArchiveFiles@2
+    displayName: Archive files
+    inputs:
+      rootFolderOrFile: publish_output/
+      includeRootFolder: false
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+  - task: AzureFunctionApp@1
+    displayName: 'Azure Function App Deploy: prismacloudsamajorsnorth'
+    inputs:
+      azureSubscription: __azuresubscription__
+      appType: functionApp
+      appName: prismacloudsamajorsnorth
+      deployToSlotOrASE: true
+      resourceGroupName: appservices-rg
+      package: $(Build.ArtifactStagingDirectory)/**/*.zip
+      deploymentMethod: zipDeploy
+...
