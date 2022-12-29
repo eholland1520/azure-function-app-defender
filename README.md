@@ -9,6 +9,18 @@ Note: The following settings are required
 5. Add dependencies to the project file
 6. Modify the C# function to include a reference to the app-embedded defender
 
+## Update Azure Function App runtime to 64-bit
+The default runtime for an Azure Function App is 32-bit. The app embedded defender requires 64-bt configuration. The setting can be changed in the Configuration --> General Settings section of the Function App.
+<p align="center">
+<img src="images/runtime-configuration-64-bit.png" width="85%">
+</p>
+
+## Add TWS_POLICY and TWS_DEBUG_ENABLED environment variables
+Set the TWS_POLICY environment variable to connect the app-embedded defender with the account and policy associated with the defender.
+<p align="center">
+<img src="images/set-tws-policy-environment-variable.png" width="85%">
+</p>
+
 ## Create a Nuget.config file
 Create a new file called nuget.config, add the following text to the file. Save and close.
 ```
