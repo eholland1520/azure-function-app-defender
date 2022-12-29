@@ -5,7 +5,47 @@ Note: The following settings are required
 1. Update Azure Function App Runtime to 64 Bit.
 2. Add TWS_Policy environment variable in Application Settings in the Azure function App.
 3. Add TWS_DEBUG_ENABLED = True to set verbose logging in the log stream for debugging (Optional)
+4. Create a nuget.config file
+5. Add dependencies to the project file
+6. Modify the C# function to include a reference to the app-embedded defender
 
+## Create a Nuget.config file
+Create a new file called nuget.config, add the following text to the file. Save and close.
+```
+<configuration>
+  <packageSources>
+    <add key="local-packages" value="./twistlock"/>
+  </packageSources>
+</configuration>
+```
+## Add dependencies to the Project file
+Add the following XML block to your existing prjoect file(*.csproj).
+```
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions" Version="5.0.0-beta.1" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
+    <PackageReference Include="Twistlock" Version="22.06.229" />
+    <TwistlockFiles Include="twistlock\*" Exclude="twistlock\twistlock.22.06.229.nupkg"/>
+    <None Include="@(TwistlockFiles)" CopyToOutputDirectory="Always" LinkBase="twistlock\" />
+  </ItemGroup>
+```
+
+## Modify C# Azure Function to include app-embedded defender
+Inside the azure function source code, insert a reference to the twistlock binary. Only the text "Twistlock.Serverless.Init(log);" is required.
+```
+namespace Company.Function
+{
+    public static class HttpTriggerDRW
+    {
+        [FunctionName("HttpTriggerDRW")]
+        public static async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            ILogger log)
+        {
+            Twistlock.Serverless.Init(log);
+
+```
 ## Deploying from Azure DevOps pipeline
 The CI/CD pipeline completes the following tasks:
 1. Downloads the twistlock binary from the Prisma Cloud console.
