@@ -10,8 +10,14 @@ Note: The following settings are required
 6. Modify the C# function to include a reference to the app-embedded defender
 
 After completing the steps outlined below you will be able to verify the defender is connected from the Manages defenders screen in the Prisma Cloud console. 
+<p align="center">
+<img src="images/azure-function-connectted-app-embedded-defender.png" width="85%">
+</p>
 
 Security events related to runtime defense of Azure c# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits.
+<p align="center">
+<img src="images/azure-function-event-app-embedded-defender.png" width="85%">
+</p>
 
 ## Create a Nuget.config file
 Create a new file called nuget.config, add the following text to the file. Save and close.
