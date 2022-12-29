@@ -48,9 +48,6 @@ namespace Company.Function
                 }
             }
             
- 
-           
- 
            string name = req.Query["name"];
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
