@@ -8,6 +8,7 @@ Note: The following settings are required
 4. Create a nuget.config file
 5. Add dependencies to the project file
 6. Modify the C# function to include a reference to the app-embedded defender
+7. Deploy the C# Azure Function to an existing Azure Function App with a CI/CD pipeline
 
 ## Update Azure Function App runtime to 64-bit
 The default runtime for an Azure Function App is 32-bit. The app embedded defender requires 64-bt configuration. The setting can be changed in the Configuration --> General Settings section of the Function App.
