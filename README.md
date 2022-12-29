@@ -9,16 +9,6 @@ Note: The following settings are required
 5. Add dependencies to the project file
 6. Modify the C# function to include a reference to the app-embedded defender
 
-After completing the steps outlined below you will be able to verify the defender is connected from the Manages defenders screen in the Prisma Cloud console. 
-<p align="center">
-<img src="images/azure-function-connectted-app-embedded-defender.png" width="85%">
-</p>
-
-Security events related to runtime defense of Azure c# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits.
-<p align="center">
-<img src="images/azure-function-event-app-embedded-defender.png" width="85%">
-</p>
-
 ## Create a Nuget.config file
 Create a new file called nuget.config, add the following text to the file. Save and close.
 ```
@@ -67,3 +57,12 @@ The CI/CD pipeline completes the following tasks:
 curl -sSL -k --header "authorization: Bearer __TWS-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
 unzip twistlock_serverless_defender.zip;
 ```
+After completing the steps outlined below you will be able to verify the defender is connected from the Manages defenders screen in the Prisma Cloud console. 
+<p align="center">
+<img src="images/azure-function-connectted-app-embedded-defender.png" width="85%">
+</p>
+
+Security events related to runtime defense of Azure c# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits.
+<p align="center">
+<img src="images/azure-function-event-app-embedded-defender.png" width="85%">
+</p>
