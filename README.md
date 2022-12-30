@@ -1,17 +1,19 @@
 # Azure Serverless App Embedded Defender
-The following describes how to deploy an app-embebbed defender with a C# azure function for runtime defense with Prisma Cloud. This document describeds the process for deploying an individual C# Azure function with an app-ebmbedded defender to an existing Azure Function App in Azure Cloud. 
+The following describes how to deploy an app-embebbed defender with a C# azure function for runtime defense with Prisma Cloud. This document describes the process for deploying an individual C# Azure function with an app-ebmbedded defender to an existing Azure Function App in Azure Cloud. 
 
 Note: The following settings are required
 1. Update Azure Function App Runtime to 64 Bit.
 2. Add TWS_Policy environment variable in Application Settings in the Azure function App.
-3. Add TWS_DEBUG_ENABLED = True to set verbose logging in the log stream for debugging (Optional)
+3. Add TWS_DEBUG_ENABLED = TRUE to set verbose logging in the log stream for debugging (Optional)
 4. Create a nuget.config file
 5. Add dependencies to the project file
 6. Modify the C# function to include a reference to the app-embedded defender
 7. Deploy the C# Azure Function to an existing Azure Function App with a CI/CD pipeline
+8. Configure a runtime policy in the Prisma Cloud console before deploying the defender
+9. In the runtime policy, under Networking / DNS / Allowed section, include "twistlock.com" and any other FQDNs you don't want to be alerted on (this is only necessary if you enable the IP connectivity feature)
 
 ## Update Azure Function App runtime to 64-bit
-The default runtime for an Azure Function App is 32-bit. The app embedded defender requires 64-bt configuration. The setting can be changed in the Configuration --> General Settings section of the Function App.
+The default runtime for an Azure Function App is 32-bit. The app embedded defender requires 64-bit. The setting can be changed in the Configuration --> General Settings section of the Function App.
 <p align="center">
 <img src="images/runtime-configuration-64-bit.png" width="85%">
 </p>
@@ -70,12 +72,12 @@ The CI/CD pipeline completes the following tasks:
 curl -sSL -k --header "authorization: Bearer __TWS-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
 unzip twistlock_serverless_defender.zip;
 ```
-After completing the steps outlined below you will be able to verify the defender is connected from the Manages defenders screen in the Prisma Cloud console. 
+After completing the steps outlined below you will be able to verify the defender is connected from the Manage / Defenders screen in the Prisma Cloud console. 
 <p align="center">
 <img src="images/azure-function-connectted-app-embedded-defender.png" width="85%">
 </p>
 
-Security events related to runtime defense of Azure c# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits.
+Security events related to runtime defense of Azure C# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits.
 <p align="center">
 <img src="images/azure-function-event-app-embedded-defender.png" width="85%">
 </p>
