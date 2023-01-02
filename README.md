@@ -61,7 +61,8 @@ namespace Company.Function
 
 ```
 ## Configure Runtime Policy in Prisma Cloud Console
-Placeholder
+
+Configure runtime policy for serverless defense (https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin-compute/runtime_defense/runtime_defense_serverless)
 
 Note: In the runtime policy section, under Networking / DNS / Allowed section, include "twistlock.com" and any other FQDNs you don't want to be alerted on (this is only necessary if you enable the IP connectivity feature).
 
