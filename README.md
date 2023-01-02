@@ -61,8 +61,10 @@ namespace Company.Function
 
 ```
 ## Configure Runtime Policy in Prisma Cloud Console
+In the prisma cloud conslue, navigate to Defend > Runtime > Serverless Policy > Add Rule
+[Configure runtime policy for serverless defense](https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin-compute/runtime_defense/runtime_defense_serverless)
 
-Configure runtime policy for serverless defense (https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin-compute/runtime_defense/runtime_defense_serverless)
+
 
 Note: In the runtime policy section, under Networking / DNS / Allowed section, include "twistlock.com" and any other FQDNs you don't want to be alerted on (this is only necessary if you enable the IP connectivity feature).
 
@@ -77,7 +79,8 @@ The CI/CD pipeline completes the following tasks:
 curl -sSL -k --header "authorization: Bearer __TWS-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
 unzip twistlock_serverless_defender.zip;
 ```
-After completing the steps outlined below you will be able to verify the defender is connected from the Manage / Defenders screen in the Prisma Cloud console. 
+After completing the steps outlined below you will be able to verify the defender is connected. To view the security audits, go to Monitor > Events > Serverless Audits. You should see audits with the following messages:
+DNS resolution of domain name yahoo.com triggered by /usr/bin/wget explicitly denied by a runtime rule.
 <p align="center">
 <img src="images/azure-function-connectted-app-embedded-defender.png" width="85%">
 </p>
