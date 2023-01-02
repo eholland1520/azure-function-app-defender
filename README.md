@@ -8,9 +8,8 @@ Note: The following settings are required
 4. Create a nuget.config file
 5. Add dependencies to the project file
 6. Modify the C# function to include a reference to the app-embedded defender
-7. Deploy the C# Azure Function to an existing Azure Function App with a CI/CD pipeline
-8. Configure a runtime policy in the Prisma Cloud console before deploying the defender
-9. In the runtime policy, under Networking / DNS / Allowed section, include "twistlock.com" and any other FQDNs you don't want to be alerted on (this is only necessary if you enable the IP connectivity feature)
+7. Configure a runtime policy in the Prisma Cloud console before deploying the defender
+8. Deploy the C# Azure Function to an existing Azure Function App with a CI/CD pipeline
 
 ## Update Azure Function App runtime to 64-bit
 The default runtime for an Azure Function App is 32-bit. The app embedded defender requires 64-bit. The setting can be changed in the Configuration --> General Settings section of the Function App.
@@ -61,6 +60,11 @@ namespace Company.Function
             Twistlock.Serverless.Init(log);
 
 ```
+## Configure Runtime Policy in Prisma Cloud Console
+Placeholder
+
+Note: In the runtime policy section, under Networking / DNS / Allowed section, include "twistlock.com" and any other FQDNs you don't want to be alerted on (this is only necessary if you enable the IP connectivity feature).
+
 ## Deploying from Azure DevOps pipeline
 The CI/CD pipeline completes the following tasks:
 1. Downloads the twistlock binary from the Prisma Cloud console.
