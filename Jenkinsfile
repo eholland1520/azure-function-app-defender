@@ -1,10 +1,8 @@
  
  pipeline {
      environment {
-      SECR = credentials("prisma_secret")
+      BEARER_TOKEN = credentials("bearer_token")
       TWISTLOCK_URL = credentials("prisma_url")
-      ARTIFACTORY_SECR = credentials("artifactory_secret")
-      ARTIFACTORY_URL = credentials("artifactory_url")
     }
    
     agent any 
