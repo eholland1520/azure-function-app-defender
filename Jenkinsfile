@@ -11,8 +11,7 @@
             steps {
                  sh '''#!/bin/bash
                   echo "Download Twistlock Defender Binary";
-                  ls;
-                  pwd;
+                  rm twistlock_serverless_defender.zip;
                   curl -sSL -k --header "authorization: Bearer $BEARER_TOKEN" -X POST $TWISTLOCK_URL/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
                   ls;
                   pwd;
