@@ -2,7 +2,7 @@
  pipeline {
      environment {
       BEARER_TOKEN = credentials("bearer_token")
-      TWISTLOCK_URL = credentials("prisma_url")
+      TWISTLOCK_URL = credentials("prisma_serverless_url")
     }
    
     agent any 
