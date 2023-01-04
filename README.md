@@ -73,6 +73,10 @@ The CI/CD pipeline completes the following tasks:
 2. Build and Package the Azure function into a Zip file.
 3. Deploy azure function zip with app-embedded defender to pre-configured Azure function App.
 
+<p align="center">
+<img src="images/azure-function-serverless-ado.png" width="85%">
+</p>
+
 ### Download the Twistlock defender from the Prisma Cloud Console
 ```
 curl -sSL -k --header "authorization: Bearer __TWS-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
