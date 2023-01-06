@@ -3,8 +3,8 @@ The following describes how to deploy an app-embebbed defender with a C# azure f
 
 Note: The following settings are required
 1. Update Azure Function App Runtime to 64 Bit.
-2. Add TWS_Policy environment variable in Application Settings in the Azure function App.
-3. Add TWS_DEBUG_ENABLED = TRUE to set verbose logging in the log stream for debugging (Optional)
+2. Add TW_Policy environment variable in Application Settings in the Azure function App.
+3. Add TW_DEBUG_ENABLED = TRUE to set verbose logging in the log stream for debugging (Optional)
 4. Create a nuget.config file
 5. Add dependencies to the project file
 6. Modify the C# function to include a reference to the app-embedded defender
@@ -17,8 +17,8 @@ The default runtime for an Azure Function App is 32-bit. The app embedded defend
 <img src="images/runtime-configuration-64-bit.png" width="85%">
 </p>
 
-## Add TWS_POLICY and TWS_DEBUG_ENABLED environment variables
-Set the TWS_POLICY environment variable to connect the app-embedded defender with the account and policy associated with the defender.
+## Add TW_POLICY and TW_DEBUG_ENABLED environment variables
+Set the TW_POLICY environment variable to connect the app-embedded defender with the account and policy associated with the defender.
 <p align="center">
 <img src="images/set-tws-policy-environment-variable.png" width="85%">
 </p>
@@ -79,7 +79,7 @@ The CI/CD pipeline completes the following tasks:
 
 ### Download the Twistlock defender from the Prisma Cloud Console
 ```
-curl -sSL -k --header "authorization: Bearer __TWS-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
+curl -sSL -k --header "authorization: Bearer __TW-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
 unzip twistlock_serverless_defender.zip;
 ```
 After completing the steps outlined below you will be able to verify the defender is connected. To view the security audits, go to Monitor > Events > Serverless Audits. You should see audits with the following messages:
