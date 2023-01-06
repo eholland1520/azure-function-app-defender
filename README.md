@@ -82,13 +82,13 @@ The CI/CD pipeline completes the following tasks:
 curl -sSL -k --header "authorization: Bearer __TW-POLICY-TOKEN__" -X POST __CONSOLE-URL__/api/v1/defenders/serverless/bundle -o twistlock_serverless_defender.zip -d "{\"runtime\":\"dotnetcore3.1\",\"provider\":\"azure\"}";
 unzip twistlock_serverless_defender.zip;
 ```
-After completing the steps outlined below you will be able to verify the defender is connected. To view the security audits, go to Monitor > Events > Serverless Audits. You should see audits with the following messages:
+After completing the steps outlined below you will be able to verify the defender is connected. To view the connected defender, navigate to Compute > Manage > Defenders. You should see your function connected with the following messages:
 DNS resolution of domain name yahoo.com triggered by /usr/bin/wget explicitly denied by a runtime rule.
 <p align="center">
 <img src="images/azure-function-connectted-app-embedded-defender.png" width="85%">
 </p>
 
-Security events related to runtime defense of Azure C# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits.
+Serverless audit events related to runtime defense of Azure C# functions with an app-embedded defender will appear in Monitor --> Events --> Serverless Audits. Clicking on a serverless audit event will provide detailed information related to the security event:
 <p align="center">
 <img src="images/azure-function-event-app-embedded-defender.png" width="85%">
 </p>
